@@ -1,29 +1,19 @@
-import express from 'express';
+import express from "express";
+import pageRoute from '../routes/pageRoute'; 
 
- 
 const app = express();
-
-
 
 // Template Engine
 app.set('view engine', 'ejs');
 
-
 //Middlewares
-app.use(express.static("public"));
- 
+app.use(express.static('public'));
 
 //Routes
-app.get('/', (req, res) => {
-    res.status(200).render('index');
-});
-
-app.get('/about', (req, res) => {
-    res.status(200).render('about');
-});
+app.use("/", pageRoute);
 
 
 const port = 3031;
 app.listen(port, () => {
-    console.log(`Listening on http://localhost:${port}`);
+  console.log(`Listening on http://localhost:${port}`);
 });
