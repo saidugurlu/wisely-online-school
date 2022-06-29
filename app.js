@@ -1,7 +1,15 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const pageRoute = require("./routes/pageRoute");
 
 const app = express();
+
+// Connect DB
+main().catch((err) => console.log(err));
+
+async function main() {
+  await mongoose.connect("mongodb://localhost/wisely-online-school");
+}
 
 // Template Engine
 app.set("view engine", "ejs");
