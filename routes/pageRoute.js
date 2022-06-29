@@ -1,5 +1,6 @@
-import express from "express";
-import pageController from "../controllers/pageController";
+const express = require('express')
+const pageController = require('../controllers/pageController');
+
 
 const router = express.Router();
 
