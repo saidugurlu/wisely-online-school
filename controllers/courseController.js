@@ -34,7 +34,7 @@ exports.getAllCourses = async (req, res) => {
 
 exports.getCourse = async (req, res) => {
   try {
-    const course = await Course.findOne({id: req.params.slug})
+    const course = await Course.findOne({_id: req.params.id})
 
     res.status(200).render('course', {
       course,
