@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
+bcrypt = require('bcrypt'); //sifre gizlemeye yarayan eklenti
 const Schema = mongoose.Schema;
+
 
 const UserSchema = new Schema({
   name: {
@@ -19,5 +21,15 @@ const UserSchema = new Schema({
 });
 
 
+UserSchema.pre('save', function (next) {
+  const user = this;
+  bcrypt.hash(user.password, 10, (err, hash) => {
+user.password = hash;
+next();
+  });
+}); //pre ile öncelikle yapılacak işlemler yazılır.
+
+
+
 const User = mongoose.model('User', UserSchema);
-module.exports = User;
+module.exports = User;  
