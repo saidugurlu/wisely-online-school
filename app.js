@@ -26,7 +26,7 @@ app.use("/", pageRoute);
 app.use("/courses", courseRoute);
 app.use("/categories", categoryRoute);
 
-const port = 3056;
+const port = 3356;
 app.listen(port, () => {
   console.log(`Listening on http://localhost:${port}`);
 });
