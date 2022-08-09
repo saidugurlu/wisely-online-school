@@ -36,7 +36,9 @@ exports.loginUser = async (req, res) => {
     if (user) {
       bcrypt.compare(password, user.password, (err, same) => { // compare is a function of bcrypt and check that password is same or not with user.password
         if (same) {
-          res.status(200).send("YOU ARE LOGGED IN");
+          // User Sessions
+          req.session.userID = user._id;
+          res.status(200).redirect("/");
         }
       });
     }
