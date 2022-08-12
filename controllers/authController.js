@@ -20,7 +20,7 @@ exports.loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-// Neu version of mongoose is not work with below code (await and callback)
+    // Neu version of mongoose is not work with below code (await and callback)
 
     /*     await User.findOne({ email: email }, (err, user) => {
       if (user) {
@@ -34,7 +34,8 @@ exports.loginUser = async (req, res) => {
     ); */
     const user = await User.findOne({ email: email });
     if (user) {
-      bcrypt.compare(password, user.password, (err, same) => { // compare is a function of bcrypt and check that password is same or not with user.password
+      bcrypt.compare(password, user.password, (err, same) => {
+        // compare is a function of bcrypt and check that password is same or not with user.password
         if (same) {
           // User Sessions
           req.session.userID = user._id;
@@ -48,4 +49,10 @@ exports.loginUser = async (req, res) => {
       error,
     });
   }
+};
+
+exports.logoutUser = (req, res) => {
+  req.session.destroy(() => {
+    res.redirect("/");
+  });
 };
